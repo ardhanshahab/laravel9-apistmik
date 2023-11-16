@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('nim');
             $table->string('nm_mhs');
+            $table->string('alamat');
+            $table->string('sts_mhs');
+            $table->string('jns_mhs');
             $table->string('jurusan');
             $table->string('kelas');
             $table->string('masuk_tahun');
@@ -25,6 +28,7 @@ return new class extends Migration
             $table->string('gol_darah');
             $table->string('nmr_hp');
             $table->string('email');
+            $table->string('image');
             $table->timestamps();
         });
     }

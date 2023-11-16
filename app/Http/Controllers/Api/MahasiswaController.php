@@ -23,7 +23,7 @@ class MahasiswaController extends Controller
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            // 'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'nim'     => 'required',
             'nm_mhs'     => 'required',
             'jurusan'     => 'required',
@@ -34,6 +34,9 @@ class MahasiswaController extends Controller
             'gol_darah'   => 'required',
             'nmr_hp'   => 'required',
             'email'   => 'required',
+            'sts_mhs'   => 'required',
+            'jns_mhs'   => 'required',
+            'alamat'   => 'required',
         ]);
 
         //check if validation fails
@@ -42,12 +45,12 @@ class MahasiswaController extends Controller
         }
 
         //upload image
-        // $image = $request->file('image');
-        // $image->storeAs('public/posts', $image->hashName());
+        $image = $request->file('image');
+        $image->storeAs('public/posts', $image->hashName());
 
         //create post
         $post = mahasiswa::create([
-            // 'image'     => $image->hashName(),
+            'image'     => $image->hashName(),
             'nim'     => $request->nim,
             'nm_mhs'     => $request->nm_mhs,
             'jurusan'     => $request->jurusan,
@@ -57,7 +60,10 @@ class MahasiswaController extends Controller
             'gol_darah'   => $request->gol_darah,
             'nmr_hp'   => $request->nmr_hp,
             'email'   => $request->email,
+            'sts_mhs'   => $request->sts_mhs,
+            'jns_mhs'   => $request->jns_mhs,
             'ttl'   => $request->ttl,
+            'alamat'   => $request->alamat,
         ]);
 
         //return response

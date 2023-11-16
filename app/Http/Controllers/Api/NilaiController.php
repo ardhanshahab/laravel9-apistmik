@@ -19,12 +19,23 @@ class NilaiController extends Controller
 
     public function getNilaiByNim($nim){
         if ($nim) {
-            # code...
-            $nilai = nilai::where('nim','=',$nim)->firstOrFail();
-            return new NilaiResource(true,'Detail of Mahasiswa',$nilai);
-            }else{
+            $nilai = Nilai::with('mahasiswa', 'matakuliah')->where('nim', '=', $nim)->get();
+
+            if ($nilai->isEmpty()) {
                 return response()->json([
-                    "status" => false,"message"=>'Mahasiswa not found'],404);
+                    "status" => false,
+                    "message" => 'Mahasiswa not found'
+                ], 404);
+            }
+
+            return response()->json([
+                "data" => $nilai,
+            ]);
+        } else {
+            return response()->json([
+                "status" => false,
+                "message" => 'Invalid nim parameter'
+            ], 400);
         }
     }
 

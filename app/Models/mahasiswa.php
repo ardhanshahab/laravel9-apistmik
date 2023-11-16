@@ -19,6 +19,10 @@ class mahasiswa extends Model
         'gol_darah',
         'nmr_hp',
         'email',
+        'jns_mhs',
+        'sts_mhs',
+        'alamat',
+        'image',
     ];
     public function nilais()
     {

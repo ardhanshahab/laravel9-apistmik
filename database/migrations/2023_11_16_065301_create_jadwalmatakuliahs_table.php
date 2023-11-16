@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('nama_dosen');
             $table->string('masuk');
             $table->string('selesai');
+            $table->string('kelas');
+            $table->string('ruangan');
             $table->timestamps();
         });
     }

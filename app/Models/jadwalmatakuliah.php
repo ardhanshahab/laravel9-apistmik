@@ -14,6 +14,8 @@ class jadwalmatakuliah extends Model
         'masuk',
         'selesai',
         'nama_dosen',
+        'kelas',
+        'ruangan',
     ];
     public function matakuliah()
 {

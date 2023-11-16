@@ -19,7 +19,7 @@ class JadwalMatakuliahController extends Controller
 
 
         //return collection of posts as a resource
-        return new JadwalmatakuliahResource(true, 'List Data Matakuliah', $jadwalmatakuliahs);
+        return new JadwalmatakuliahResource(true, 'List Data Jadwal Matakuliah', $jadwalmatakuliahs);
     }
 
     public function store(Request $request)
@@ -32,6 +32,8 @@ class JadwalMatakuliahController extends Controller
             'masuk'     => 'required',
             'selesai'     => 'required',
             'nama_dosen'     => 'required',
+            'kelas'     => 'required',
+            'ruangan'     => 'required',
         ]);
 
         //check if validation fails
@@ -51,7 +53,8 @@ class JadwalMatakuliahController extends Controller
             'masuk'     => $request->masuk,
             'selesai'     => $request->selesai,
             'nama_dosen'     => $request->nama_dosen,
-
+            'kelas'     => $request->kelas,
+            'ruangan'     => $request->ruangan,
         ]);
 
         //return response
@@ -59,7 +62,8 @@ class JadwalMatakuliahController extends Controller
     }
     public function show($kd_mk)
     {
-        $Matakuliah = jadwalmatakuliah::where('kd_mk', $kd_mk)->first();
+        // Jadwalmatakuliah::with('matakuliah')->get();
+        $Matakuliah = jadwalmatakuliah::with('matakuliah')->where('kd_mk', $kd_mk)->first();
 
         if (!$Matakuliah) {
             return response()->json([
@@ -69,7 +73,7 @@ class JadwalMatakuliahController extends Controller
 
             ], 404);
         }
-        return new JadwalmatakuliahResource(true, 'Data Detail Matakuliah Berhasil Ditemukan!', $Matakuliah);
+        return new JadwalmatakuliahResource(true, 'Data Detail Jadwal Matakuliah Berhasil Ditemukan!', $Matakuliah);
         // return response()->json(['data' => $Matakuliah]);
     }
 
@@ -82,6 +86,8 @@ class JadwalMatakuliahController extends Controller
             'masuk'     => 'required',
             'selesai'     => 'required',
             'nama_dosen'     => 'required',
+            'kelas'     => 'required',
+            'ruangan'     => 'required',
         ]);
 
         // Check if validation fails
@@ -104,6 +110,8 @@ class JadwalMatakuliahController extends Controller
             'masuk'     => $request->masuk,
             'selesai'     => $request->selesai,
             'nama_dosen'     => $request->nama_dosen,
+            'kelas'     => $request->kelas,
+            'ruangan'     => $request->ruangan,
         ]);
 
         // Fetch the updated data from the database
